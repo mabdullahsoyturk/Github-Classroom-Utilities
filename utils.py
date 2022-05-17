@@ -6,6 +6,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--pledge', action='store_true', default=True, help='Check pledge of honor')
     parser.add_argument('--submission_time', action='store_true', default=True, help='Check last submission time')
+    parser.add_argument('--similarity', action='store_true', default=True, help='Check similarity')
     parser.add_argument('--lab_file', default='lab7.csv', help='Path to lab file retrieved from Github Classroom')
     parser.add_argument('--pledge_file', default='pledge.csv', help='Path to output pledge file')
     parser.add_argument('--submission_file', default='submission_time.csv', help='Path to output submission time file')

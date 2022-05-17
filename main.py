@@ -1,5 +1,6 @@
 import datetime
 from utils import get_args, remove_existing_outs, get_students, download_repositories
+from similarity import send_to_moss
 
 def main(args):
     remove_existing_outs(args)
@@ -16,6 +17,9 @@ def main(args):
         if args.submission_time:
             deadline = datetime.datetime(args.year, args.month, args.day, args.hour, args.minute)
             student.check_submission_date(deadline)
+
+        if args.similarity:
+            link = send_to_moss()
 
 if __name__ == '__main__':
     args = get_args()
