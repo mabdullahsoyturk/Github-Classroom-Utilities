@@ -21,6 +21,8 @@ def main(args):
         if args.similarity:
             link = send_to_moss()
 
+            download_moss_results(link)
+
 if __name__ == '__main__':
     args = get_args()
     main(args)

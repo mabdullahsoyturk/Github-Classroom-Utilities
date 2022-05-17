@@ -1,5 +1,6 @@
 import argparse
 import os
+import glob
 from student import Student
 
 def get_args():
@@ -42,3 +43,39 @@ def get_students(args):
 def download_repositories(students):
     for student in students:
         student.download_repo()
+
+def download_moss_results(link):
+    if not os.path.isdir('students'):
+        os.mkdir("students")
+
+    os.system(f'wget {link}')
+
+    main_html_file = glob.glob("*.html")[0]
+
+    out = subprocess.check_output(["grep", "<TD>", main_html_file]).decode("utf-8").split("\n")
+
+    links = []
+
+    for index, line in enumerate(out):
+        if index % 2 == 0:
+            splitted = line.strip().split('"')
+
+            if len(splitted) > 1:
+                links.append(splitted[1])
+
+    os.chdir("students/")
+
+    for link in links:
+        folder_name = link.split("/")[-1][:-5]
+        os.mkdir(folder_name)
+        os.chdir(folder_name)
+        
+        os.system(f'wget {link}')
+        zeroth = "{}-0.html".format(link[:-5])
+        first = "{}-1.html".format(link[:-5])
+        
+        os.system(f'wget {zeroth}')
+        os.system(f'wget {first}')
+
+        os.chdir("../")
+    
