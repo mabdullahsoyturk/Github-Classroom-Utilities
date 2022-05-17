@@ -20,6 +20,7 @@ def main(args):
 
         if args.similarity:
             link = send_to_moss()
+            print(f"Moss link: {link}")
 
             download_moss_results(link)
 
